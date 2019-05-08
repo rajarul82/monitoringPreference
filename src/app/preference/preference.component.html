@@ -1,0 +1,259 @@
+<div class="monitoringPref">
+  <span class="preference-caption-head">Monitoring Preferences</span>
+  <div>
+    <div class="preference-main-wrapper">
+      <div class="preference-main">
+        <div class="preference-main-left divpref-outline">
+          <div class="tab-head-bar-pref tab4_1">
+            <span class="preference-caption" style="color:floralwhite">Monitoring Records</span>
+          </div>
+          <table class="table monitoring-preference-tb">
+            <tr id="mr_row_1" class="mon-pref-ver-align">
+              <td class="monitoring-preference-td border-top-none" colspan="3"><strong>UCC Debtor</strong> </td>
+            </tr>
+            <tr id="mr_row_2" class="mon-pref-ver-align mon-pref-odd-row">
+              <td class="monitoring-preference-td">Ignore UCC Debtor Alerts in the Organizational Portfolio </td>
+              <td class="width16">
+                <div class="monitoring-preference-label">
+                  <span><input id="mr_company" type="radio" [ngModel]="prefModel.IgnoreAlertsForPortfolio" [disabled]="isDisableMonitoringPref" value="Company" /></span>
+                  <span class="monitoring-preference-text-valign">Company</span>
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <span><input id="mr_org" type="radio" [ngModel]="prefModel.IgnoreAlertsForPortfolio"  [disabled]="isDisableMonitoringPref" value="Organization" /></span>
+                  <span class="monitoring-preference-text-valign">Organization</span>
+                </div>
+              </td>
+            </tr>
+            <tr id="mr_row_3" class="mon-pref-ver-align">
+              <td class="monitoring-preference-td">Use debtor city and state for more precise matching on UCC Debtor events </td>
+              <td class="width16">
+                <div class="monitoring-preference-label">
+                  <span><input id="chkBusinessDebt" type="checkbox" [ngModel]="prefModel.UseDebtorCityForBus" [disabled]="isDisableMonitoringPref" /></span>
+                  <span class="monitoring-preference-text-valign">Business Debtors</span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <span><input id="chkIndividualDebt" type="checkbox" [ngModel]="prefModel.UseDebtorCityForInd" [disabled]="isDisableMonitoringPref" /></span>
+                  <span class="monitoring-preference-text-valign">Individual Debtors</span>
+                </div>
+              </td>
+            </tr>
+            <tr id="mr_row_4_be" class="mon-pref-ver-align">
+              <td class="monitoring-preference-td border-top-none" colspan="3"><strong>Business Entity</strong> </td>
+            </tr>
+            <tr id="mr_row_5" class="mon-pref-ver-align mon-pref-odd-row">
+              <td class="monitoring-preference-td border-top-none">Enable required Organisation Jurisdiction and Organisation ID </td>
+              <td class="width16 border-top-none" colspan="2">
+                <div class="monitoring-preference-label">
+                  <!--<switch id="ChkOrganisationID" on="On" off="Off" ng-model="prefModel.EnableRequiredOrgId" disabled="isDisableMonitoringPref" class="green">
+                  </switch>-->
+                </div>
+              </td>
+            </tr>
+
+            <tr id="mr_row_6" class="mon-pref-ver-align">
+              <td class="monitoring-preference-td border-top-none">Unresolved Monitoring Report Frequency</td>
+              <td class="width16 border-top-none" colspan="2">
+                <div class="monitoring-preference-label">
+                  <select id="mr_reportfrequency" [ngModel]="prefModel.UnresolveRepFeq" [disabled]="isDisableMonitoringPref">
+                    <option selected>Weekly</option>
+                    <option>None</option>
+                  </select>
+                </div>
+              </td>
+            </tr>
+
+            <tr id="mr_row_7_email" class="mon-pref-ver-align mon-pref-odd-row">
+              <td id="mr_row_7_email_td" class="monitoring-preference-td border-top-none">Unresolved Monitoring Report Email Address</td>
+              <td class="width16 border-top-none" colspan="2">
+                <div class="monitoring-preference-label"><input id="ChkOrganisationID" type="text" size="44" [ngModel]="prefModel.UnresolveRepEmail" [disabled]="isDisableMonitoringPref" /></div>
+              </td>
+            </tr>
+
+            <tr id="mr_row_8" class="mon-pref-ver-align">
+              <td class="monitoring-preference-td border-top-none"><strong>Full Monitoring Portfolio View: </strong> Show all monitoring records for the past </td>
+              <td class="width16 border-top-none" colspan="2">
+                <div class="monitoring-preference-label">
+                  <select id="mr_fullmonitoring" [ngModel]="prefModel.TimeFrameBy" [disabled]="isDisableMonitoringPref">
+                    <option selected>Last Month</option>
+                    <option>Last Week</option>
+                    <option>Today</option>
+                    <option>Last Year</option>
+                    <option>All</option>
+                  </select>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <div class="floatRight widthper18pt8">
+
+            <span class="margin-left4">
+              <span id="spnOverride">
+                <button id="btnOverrideRecord" class="wk-button" type="button" (click)="isDisableMonitoringPreferences()" [disabled]="!isUserAuthorized" ng-class="{'prefbtn-returnToPortfoio':isManager,'prefbtn-returnToPortfoio hide':!isManager}" ng-show="isDisableMonitoringPref" ng-cloak>
+                  Override
+                </button>
+              </span>
+              <button type="button" (click)="InsertMonitoringPreference(prefModel)" class="prefbtn-returnToPortfoio wk-button" ng-show="!isDisableMonitoringPref" ng-cloak>
+                Update
+              </button>
+            </span>
+          </div>
+
+          <br /><br /><br />
+          <div class="tab-head-bar-pref tab4_1">
+            <span class="preference-caption" style="color:floralwhite">Monitoring Alerts</span>
+          </div>
+
+          <table class="table monitoring-preference-tb">
+            <tr class="mon-pref-ver-align">
+              <td class="monitoring-preference-td border-top-none" colspan="7"><strong>UCC Debtor Alerts</strong> </td>
+            </tr>
+            <tr class="mon-pref-ver-align">
+
+              <td id="ma_row_1" colspan="7" class="border-top-none paddingpx0">
+                <table class="table">
+                  <tr class="mon-pref-ver-align mon-pref-odd-row">
+                    <td class="width10 border-top-none padding-leftpx55">
+                      <div class="monitoring-preference-label">
+                        <span><input id="ma_ucc_all" type="checkbox" [ngModel]="prefModel.All" [disabled]="isDisableMonitoringPrefAlerts" value="All" ng-change="AllUccDebtorAlertsCheckboxClicked()" /></span>
+                        <span class="monitoring-preference-text-valign">All</span>
+                      </div>
+                    </td>
+                    <td class="width10 border-top-none">
+                      <div class="monitoring-preference-label">
+                        <span><input id="ma_ucc_original" type="checkbox" [ngModel]="prefModel.Original" [disabled]="isDisableMonitoringPrefAlerts" value="Original" /></span>
+                        <span class="monitoring-preference-text-valign">Original</span>
+                      </div>
+                    </td>
+
+                    <td class="width10 border-top-none">
+                      <div class="monitoring-preference-label">
+                        <span><input id="ma_ucc_amendment" type="checkbox" [ngModel]="prefModel.Amendment" [disabled]="isDisableMonitoringPrefAlerts" value="Amendment" /></span>
+                        <span class="monitoring-preference-text-valign">Amendment</span>
+                      </div>
+                    </td>
+                    <td class="width10 border-top-none">
+                      <div class="monitoring-preference-label">
+                        <span><input id="ma_ucc_assignment" type="checkbox" [ngModel]="prefModel.Assignment" [disabled]="isDisableMonitoringPrefAlerts" value="Assignment" /></span>
+                        <span class="monitoring-preference-text-valign">Assignment</span>
+                      </div>
+                    </td>
+                    <td class="width10 border-top-none">
+                      <div class="monitoring-preference-label">
+                        <span><input id="ma_ucc_continuation" type="checkbox" [ngModel]="prefModel.Continuation" [disabled]="isDisableMonitoringPrefAlerts" value="Continuation" /></span>
+                        <span class="monitoring-preference-text-valign">Continuation</span>
+                      </div>
+                    </td>
+                    <td class="width10 border-top-none">
+                      <div class="monitoring-preference-label">
+                        <span><input id="ma_ucc_termination" type="checkbox" [ngModel]="prefModel.Termination" [disabled]="isDisableMonitoringPrefAlerts" value="Termination" /></span>
+                        <span class="monitoring-preference-text-valign">Termination</span>
+                      </div>
+                    </td>
+                    <td class="width10 border-top-none">
+                      <div class="monitoring-preference-label">
+                        <span><input id="ma_ucc_taxlien" type="checkbox" [ngModel]="prefModel.TaxLien" [disabled]="isDisableMonitoringPrefAlerts" value="TaxLien" /></span>
+                        <span class="monitoring-preference-text-valign">Tax Lien</span>
+                      </div>
+                    </td>
+                    <td class="width10 border-top-none">
+                      <div class="monitoring-preference-label">
+                        <span><input id="ma_ucc_other" type="checkbox" [ngModel]="prefModel.Others" [disabled]="isDisableMonitoringPrefAlerts" value="Others" /></span>
+                        <span class="monitoring-preference-text-valign">Others</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr class="mon-pref-ver-align">
+              <td class="monitoring-preference-td padding-leftpx70" colspan="5">
+                <div>
+                  <span>Email Address</span><span class="padding-leftpx55">
+                    <textarea [ngModel]="prefModel.UCCEmail" [disabled]="isDisableMonitoringPrefAlerts" value="UCCEmail" cols="40" rows="5" placeholder="abc123@email.com,abc123@email.com" maxlength="500"></textarea>
+                  </span>
+                </div>
+              </td>
+              <td class="monitoring-preference-td padding-leftpx65" colspan="2">
+                <div id="ma_row_2" class="monitoring-preference-label">
+                  <span><input id="ma_ucc_altsubmitter" type="checkbox" [ngModel]="prefModel.UCCAlertToSubmitter" [disabled]="isDisableMonitoringPrefAlerts" value="UCCAlertToSubmitter" /></span>
+                  <span class="monitoring-preference-text-valign">Also send alerts to filing submitter</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr class="mon-pref-ver-align">
+              <td class="monitoring-preference-td border-top-none" colspan="7"><strong>Business Entity Alerts</strong> </td>
+            </tr>
+
+            <tr id="ma_row_3" class="mon-pref-ver-align mon-pref-odd-row">
+              <td colspan="7" class="border-top-none paddingpx0">
+                <table class="table width33">
+                  <tr class="mon-pref-ver-align mon-pref-odd-row">
+                    <td class="border-top-none padding-leftpx55">
+                      <div class="monitoring-preference-label" style="white-space:nowrap">
+                        <span><input id="ma_be_status" type="checkbox" [ngModel]="prefModel.StatusChange" [disabled]="isDisableMonitoringPrefAlerts" value="StatusChange" /></span>
+                        <span class="monitoring-preference-text-valign" style="white-space:nowrap">Status Change</span>
+                      </div>
+                    </td>
+                    <td class="border-top-none">
+                      <div class="monitoring-preference-label">
+                        <span><input id="ma_be_name" type="checkbox" [ngModel]="prefModel.NameChange" [disabled]="isDisableMonitoringPrefAlerts" value="NameChange" /></span>
+                        <span class="monitoring-preference-text-valign">Name Change</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr class="mon-pref-ver-align">
+              <td class="monitoring-preference-td padding-leftpx70" colspan="5">
+                <div>
+                  <span>Email Address</span><span class="padding-leftpx55">
+                    <textarea [ngModel]="prefModel.BEEmail" [disabled]="isDisableMonitoringPrefAlerts" value="BEEmail" cols="40" rows="5" placeholder="abc123@email.com,abc123@email.com" maxlength="500"></textarea>
+                  </span>
+                </div>
+              </td>
+              <td class="monitoring-preference-td padding-leftpx65" colspan="2">
+                <div id="ma_row_4" class="monitoring-preference-label">
+                  <span><input id="ma_be_altsubmitter" type="checkbox" [ngModel]="prefModel.BEAlertToSubmitter" [disabled]="isDisableMonitoringPrefAlerts" value="BEAlertToSubmitter" /></span>
+                  <span class="monitoring-preference-text-valign">Also send alerts to filing submitter</span>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="floatRight width33">
+      <!--<span class="margin-left4">
+        <button type="button" title="Return to Portfolio" onclick="location.href='@Url.Action(" MonitoringPortfolio")'" class="prefbtn-returnToPortfoio wk-button" ng-cloak>Return to Portfolio</button>
+      </span>-->
+      <span class="margin-left4">
+        <button type="button" title="Return to Portfolio" (click)="returnToMonitoringPortfolio()" class="prefbtn-returnToPortfoio wk-button" ng-cloak>Return to Portfolio</button>
+      </span>
+      <span class="margin-left4">
+        <span id="spnOverride">
+          <button id="btnOverrideAlert" class="wk-button" type="button" title="Override" (click)="isDisableMonitoringPreferencesAlerts()" [disabled]="!isUserAuthorized" ng-show="isDisableMonitoringPrefAlerts" ng-class="{'prefbtn-returnToPortfoio':isManager,'prefbtn-returnToPortfoio hide':!isManager}" ng-cloak>
+            Override
+          </button>
+        </span>
+
+        <button type="button" title="Update" (click)="InsertMonitoringPreference(PreferencesRecord)" ng-show="!isDisableMonitoringPrefAlerts" class="prefbtn-returnToPortfoio wk-button" ng-cloak>
+          Update
+        </button>
+      </span>
+    </div>
+    <br /><br /><br />
+    <!--<toaster-container toaster-options="{'time-out': 1000, 'close-button':true, 'animation-class': 'toast-top-right'}"></toaster-container>-->
+  </div>
+</div>
