@@ -49,7 +49,7 @@
               <td class="monitoring-preference-td border-top-none">Enable required Organisation Jurisdiction and Organisation ID </td>
               <td class="width16 border-top-none" colspan="2">
                 <div class="monitoring-preference-label">
-                  <ui-switch [(ngModel)]="prefModel.EnableRequiredOrgId" disabled="isDisableMonitoringPref"></ui-switch>
+                  <ui-switch [(ngModel)]="prefModel.EnableRequiredOrgId" [disabled]="isDisableMonitoringPref"></ui-switch>
                   <!--<switch id="ChkOrganisationID" on="On" off="Off" ng-model="prefModel.EnableRequiredOrgId" disabled="isDisableMonitoringPref" class="green">
                   </switch>-->
                 </div>
